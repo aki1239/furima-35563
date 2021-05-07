@@ -31,25 +31,24 @@ Things you may want to cover:
 | Column         | Type   | Options     |
 | --------       | ------ | ----------- |
 | nickname       | string | null: false |
-| email          | string | null: false |
-| password       | string | null: false |
+| email          | string | null: false,unique: true, index:true |
+| encrypted_password       | string | null: false |
 |family_name     | string | null: false |
 |first_name      | string | null: false |
 |family_name_kana| string |null: false  |
 |first_name_kana | string | null: false |
 | birth_date     | date   | null: false |
-| city           | string | null: false |
-| house_number   | string | null: false |
-| building_name  | string |             |
-|phone_number    | string | null: false |
-|prefecture_code | integer| null: false |
+|post_code       | string | null: false |
+| user           |reference| null: false, foreign_key: true |
 
 
 
 
 ### Association
-　has_many :items
-  has_one :credit_card, dependent: :destroy
+has_many :items
+has_many :histories
+has_many :deliver_addresses
+ 
 
 ##  items テーブル
 
@@ -58,30 +57,48 @@ Things you may want to cover:
 | --------  | ------ | ----------- |
 | name      | string | null: false |
 |price      | integer| null: false |
-|days       |  date  | null: false |
 |description|text    | null: false |
 |category   | integer| null: false |
-|status     | integer| null: false |
-|cost       |integer | null: false |
-|seller     |reference| null: false |
-|buyer      |reference|             |
+|status_id  | integer| null: false |
+|cost_id    |integer | null: false |
+|area_id    |integer | null: false |
+|days_id    |integer | null: false |
+|user_id    |integer | null: false, foreign_key: true |
+|item_id    |integer | null: false, foreign_key: true |
 
 
 ### Association
 belongs_to :user
+has_many :histories
+has_many :deliver_addresses
 
 
 
 
 
-## credit_cards テーブル
+
+## histories テーブル
 
 | Column    | Type     | Options     |
 | --------  | -------- | ----------- |
-|user_id    | integer  | null: false |
-|customer_id| string   | null: false |
-|card_id    | string   | null: false |
+|user_id    | integer  | null: false, foreign_key: true |
+|item_id    | integer  | null: false, foreign_key: true |
+
 
 ### Association
 
-- belongs_to :user
+belongs_to :user
+belongs_to :item
+
+## deliver_addresses テーブル
+
+| Column    | Type     | Options     |
+| --------  | -------- | ----------- |
+|user_id    | integer  | null: false, foreign_key: true |
+|area_id    | integer  | null: false, foreign_key: true |
+
+
+### Association
+
+belongs_to :user
+belongs_to :item
