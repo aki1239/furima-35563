@@ -38,8 +38,7 @@ Things you may want to cover:
 |family_name_kana| string |null: false  |
 |first_name_kana | string | null: false |
 | birth_date     | date   | null: false |
-|post_code       | string | null: false |
-| user           |reference| null: false, foreign_key: true |
+
 
 
 
@@ -47,7 +46,7 @@ Things you may want to cover:
 ### Association
 has_many :items
 has_many :histories
-has_many :deliver_addresses
+
  
 
 ##  items テーブル
@@ -58,19 +57,19 @@ has_many :deliver_addresses
 | name      | string | null: false |
 |price      | integer| null: false |
 |description|text    | null: false |
-|category   | integer| null: false |
+|category_id| integer| null: false |
 |status_id  | integer| null: false |
 |cost_id    |integer | null: false |
 |area_id    |integer | null: false |
 |days_id    |integer | null: false |
 |user_id    |integer | null: false, foreign_key: true |
-|item_id    |integer | null: false, foreign_key: true |
+
 
 
 ### Association
 belongs_to :user
-has_many :histories
-has_many :deliver_addresses
+has_one :history
+
 
 
 
@@ -89,16 +88,26 @@ has_many :deliver_addresses
 
 belongs_to :user
 belongs_to :item
+has_one :deliver_address
 
 ## deliver_addresses テーブル
 
-| Column    | Type     | Options     |
-| --------  | -------- | ----------- |
-|user_id    | integer  | null: false, foreign_key: true |
-|area_id    | integer  | null: false, foreign_key: true |
+| Column                 | Type       | Options     |
+| --------               | --------   | ----------- |
+|user_id                 | integer    | null: false, foreign_key: true |
+|deliver_family_name     | string     | null: false |
+|deliver_first_name      | string     | null: false |
+|deliver_family_name_kana| string     | null: false |
+|deliver_first_name_kana | string     | null: false |
+|post_code               | integer    | null: false |
+|prefecture_id           | integer    | null: false |
+|city                    | string     | null: false |
+|home_number             | string     | null: false |
+|building_name           | string     | null: false |
+|phone_number            | string     | null: false |
+|user                    | references | null: false,foreign_key:true |
 
 
 ### Association
 
-belongs_to :user
-belongs_to :item
+belongs_to :histories
