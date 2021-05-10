@@ -60,7 +60,7 @@ has_many :histories
 |category_id| integer| null: false |
 |status_id  | integer| null: false |
 |cost_id    |integer | null: false |
-|area_id    |integer | null: false |
+|prefecture_id    |integer | null: false |
 |days_id    |integer | null: false |
 |user_id    |integer | null: false, foreign_key: true |
 
@@ -94,20 +94,15 @@ has_one :deliver_address
 
 | Column                 | Type       | Options     |
 | --------               | --------   | ----------- |
-|user_id                 | integer    | null: false, foreign_key: true |
-|deliver_family_name     | string     | null: false |
-|deliver_first_name      | string     | null: false |
-|deliver_family_name_kana| string     | null: false |
-|deliver_first_name_kana | string     | null: false |
-|post_code               | integer    | null: false |
+|post_code               | string     | null: false |
 |prefecture_id           | integer    | null: false |
 |city                    | string     | null: false |
 |home_number             | string     | null: false |
-|building_name           | string     | null: false |
+|building_name           | string     |             |
 |phone_number            | string     | null: false |
-|user                    | references | null: false,foreign_key:true |
+|history_id              | references | null: false,foreign_key:true |
 
 
 ### Association
 
-belongs_to :histories
+belongs_to :history
