@@ -92,6 +92,17 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include 'First name kana is invalid'
       end
+      it 'family_nameが漢字、平仮名、カタカナ以外では登録できない' do
+        @user.family_name = 'huhu'
+        @user.valid?
+        expect(@user.errors.full_messages).to include 'Family name is invalid'
+      end
+      it 'first_nameが漢字、平仮名、カタカナ以外では登録できない' do
+        @user.first_name = 'hehe'
+        @user.valid?
+        expect(@user.errors.full_messages).to include 'First name is invalid'
+      end
+
       it 'passwordが英数字でないと登録できない' do
         @user.password = '漢字'
         @user.valid?

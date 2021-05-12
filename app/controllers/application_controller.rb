@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::Base
-  # before_action :authenticate_user!
-  # ログイン新規登録などのリクエストからパラメーターを取得できる
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   private
