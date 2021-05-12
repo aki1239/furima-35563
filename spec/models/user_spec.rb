@@ -9,8 +9,8 @@ RSpec.describe User, type: :model do
         expect(@user).to be_valid
       end
       it 'passwordとpassword_confirmationが6文字以上であれば登録できる' do
-        @user.password = '000000'
-        @user.password_confirmation = '000000'
+        @user.password = '000000a'
+        @user.password_confirmation = '000000a'
         expect(@user).to be_valid
       end
     end
@@ -69,6 +69,13 @@ RSpec.describe User, type: :model do
         another_user.valid?
         expect(another_user.errors.full_messages).to include('Email has already been taken')
       end
+      it 'emailに@が含まれていない場合、登録できないこと' do
+        @user.email = 'testtest'
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Email is invalid"
+      end
+
+
       it 'passwordが5文字以下では登録できない' do
         @user.password = '00000'
         @user.password_confirmation = '00000'
@@ -95,6 +102,12 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include "Password confirmation doesn't match Password"
       end
+      it 'passeordが数字のみでは登録できない' do
+        @user.password = '111111'
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Password confirmation doesn't match Password"
+      end
+
     end
   end
 end
