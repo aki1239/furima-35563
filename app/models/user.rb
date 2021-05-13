@@ -17,6 +17,7 @@ class User < ApplicationRecord
     validates :first_name_kana
   end
     validates :birth_date
-    validates :password, format: { with:  /\A(?=.?[a-zA-Z])(?=.?\d)[a-zA-Z\d]{6,}+\z/i  }
+    validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i  }
+
   end
 end
