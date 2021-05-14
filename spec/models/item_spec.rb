@@ -12,7 +12,7 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid
       end
       it 'priceが300~9999999であれば出品できる' do
-        @item.price = '333'
+        @item.price = 333
         expect(@item).to be_valid
       end
     end
@@ -76,21 +76,33 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Description is too long (maximum is 1000 characters)')
       end
-      it 'priceが半角数字出ないと出品できない' do
-        @item.price = 'あ'
+      it 'priceが全角文字では出品できない' do
+        @item.price = 3
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is not a number')
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it 'priceが299以下だと出品できない' do
-        @item.price = '299'
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it 'priceが10000000以上だと出品できない' do
-        @item.price = '10000000'
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be less than 9999999')
       end
+      it 'priceが半角英語だけでは出品できない' do
+        @item.price = 'huhuhu'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not a number')
+      end
+      it 'priceが半角英数混合では出品できない' do
+        @item.price = 'huhuhu222'
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not a number')
+      end
+
+
     end
   end
 end
