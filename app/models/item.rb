@@ -18,13 +18,13 @@ class Item < ApplicationRecord
   belongs_to :days
 
   with_options numericality: { other_than: 1 } do
-  validates :category_id
-  validates :status_id
-  validates :cost_id
-  validates :prefecture_id
-  validates :days_id
+    validates :category_id
+    validates :status_id
+    validates :cost_id
+    validates :prefecture_id
+    validates :days_id
   end
-  
+
   with_options presence: true do
     validates :category_id
     validates :status_id
