@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
-
+  
   with_options presence: true do
     validates :name, length: { maximum: 40 }
     validates :price, numericality: { greater_than_or_equal_to: 300, less_than: 9_999_999 }, format: { with: /\A^[0-9]*$\z/ }
