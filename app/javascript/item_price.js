@@ -1,3 +1,4 @@
+
 const priceInput = document.getElementById("item-price");
   priceInput,addEventListener("input", () => {
     const priceInput = document.getElementById("item-price");
@@ -16,5 +17,3 @@ const priceInput = document.getElementById("item-price");
       
 
 })
-
-
