@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit]
   before_action :baria_user, only: [:edit, :update, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :move_to_path, only:[:edit]
+  before_action :move_to_path, only:[:edit,:update]
   def index
     @items = Item.order(id: :desc)
   end
