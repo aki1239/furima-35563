@@ -15,8 +15,8 @@ RSpec.describe OrderAddress, type: :model do
       expect(@order_address).to be_valid
     end
     it "building_nameが空でも登録できる" do
-      expect(@order_address).to be_valid
       @order_address.building_name = ''
+      expect(@order_address).to be_valid  
     end
   end
   context '内容に問題がある場合' do
