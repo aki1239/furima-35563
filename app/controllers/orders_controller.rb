@@ -48,3 +48,4 @@ def pay_item
      currency: 'jpy'                 
     )
 end
+end
