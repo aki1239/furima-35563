@@ -61,7 +61,7 @@ class ItemsController < ApplicationController
 
   def move_to_path
     if @item.order.present?
-      redirect_to root_path(current_user)
+      redirect_to root_path
   end
 end
 end

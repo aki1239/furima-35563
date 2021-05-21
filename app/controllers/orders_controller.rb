@@ -35,7 +35,7 @@ before_action :move_to_path, only:[:index, :create]
   end
   def move_to_path
     if @item.order.present?
-      redirect_to root_path(current_user)
+      redirect_to root_path
   end
 end
 

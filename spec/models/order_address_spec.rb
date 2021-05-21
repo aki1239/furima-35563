@@ -56,12 +56,12 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
     end
     it 'phone_numberは11桁でないと購入できない' do
-        @order_address.phone_number = 111111
+        @order_address.phone_number = '111111'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number is invalid")
     end
     it 'phone_numberが半角数字のみでは購入できない' do
-        @order_address.phone_number = 111111
+        @order_address.phone_number = '111111'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number is invalid")
     end
@@ -73,19 +73,9 @@ RSpec.describe OrderAddress, type: :model do
     end
 
     it 'phone_numberが12桁以上だと購入できない' do
-       @order_address.phone_number = 111111222222
+       @order_address.phone_number = '111111222222'
        @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number is invalid")
     end
-
-
-
-
-
-    
-
-
-
-
   end
 end
