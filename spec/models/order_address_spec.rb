@@ -11,6 +11,9 @@ RSpec.describe OrderAddress, type: :model do
     it "各項目埋まっていれば購入できる" do
       expect(@order_address).to be_valid
     end
+    it "priceとtokenがあれば保存ができること" do
+      expect(@order_address).to be_valid
+    end
   end
   context '内容に問題がある場合' do
     it 'post_codeが空では購入できない' do
@@ -37,6 +40,11 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.phone_number = ''
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number can't be blank")
+    end
+    it "tokenが空では登録できないこと" do
+      @order_address.token = ''
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Token can't be blank")
     end
     it 'post_codeに-がないと購入できない' do
         @order_address.post_code = 111111
